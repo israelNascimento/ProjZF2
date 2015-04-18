@@ -11,7 +11,7 @@ namespace Livraria;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-
+use Livraria\Service\Categoria as CategoriaService;
 class Module
 {
     public function onBootstrap(MvcEvent $e)
@@ -34,6 +34,19 @@ class Module
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                     __NAMESPACE__.'Admin' => __DIR__ . '/src/' . __NAMESPACE__.'Admin',
                 ),
+            ),
+        );
+    }
+
+    public function getServiceConfig() {
+
+        return array(
+            'factories' => array(
+                'Livraria\Service\Categoria'=> function($service)
+                {
+                    return new CategoriaService($service->get('Doctrine\ORM\EntityManager'));
+                }
+
             ),
         );
     }

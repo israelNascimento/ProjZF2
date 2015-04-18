@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Categoria
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -31,6 +32,11 @@ class Categoria
      * @var string
      */
     protected $nome;
+
+    function __construct($options=null)
+    {
+        Configurator::configure($this,$options);
+    }
 
     /**
      * @return int
