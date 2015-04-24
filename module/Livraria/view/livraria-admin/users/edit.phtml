@@ -1,0 +1,20 @@
+<h3>Editando Usuário</h3>
+<br>
+
+<?php
+
+$form=$this->form;
+
+$form->setAttribute('action', $this->url('livraria-admin-interna', array('controller'=>'users', 'action'=>'edit')));
+
+
+
+$form->prepare();
+echo $this->form()->openTag($form);
+echo  $this->formHidden($form->get('id'))."</br></br>";
+echo $this->formRow($form->get('nome'))."</br></br>";
+echo $this->formRow($form->get('email'))."</br></br>";
+echo $this->formRow($form->get('password'))."</br></br>";
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->CloseTag();
+?>

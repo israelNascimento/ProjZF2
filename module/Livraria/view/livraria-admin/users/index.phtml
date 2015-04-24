@@ -1,0 +1,28 @@
+<h1>Usuários</h1>
+<p><a href="<?php echo $this->url('livraria-admin', array('controller'=>'users', 'action'=>'new'));?>">Novo</a></a></p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Ação</th>
+    </tr>
+
+    <tr>
+        <?php foreach($this->data as $categoria): ?>
+        <td><?php echo $categoria->getId(); ?></td>
+        <td><?php echo $categoria->getNome(); ?></td>
+        <td><?php echo $categoria->getEmail(); ?></td>
+        <td>
+            <a href="<?php echo $this->url('livraria-admin-interna', array('controller'=>'users', 'action'=>'edit', 'id'=>$categoria->getId())); ?>">Editar</a>
+            <a href="<?php echo $this->url('livraria-admin-interna', array('controller'=>'users', 'action'=>'delete', 'id'=>$categoria->getId())); ?>">Deletar</a>
+
+
+        </td>
+
+    </tr>
+    <?php endforeach; ?>
+</table>
+<br/>
+<?php echo $this->paginationControl($this->data,'Sliding','paginator'); ?>
+

@@ -60,7 +60,10 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Livraria\Controller\Index' => 'Livraria\Controller\IndexController',
-            'categorias' => 'LivrariaAdmin\Controller\CategoriasController'
+            'categorias' => 'LivrariaAdmin\Controller\CategoriasController',
+            'livros' => 'LivrariaAdmin\Controller\LivrosController',
+            'users' => 'LivrariaAdmin\Controller\UsersController'
+
         ),
     ),
     'view_manager' => array(

@@ -33,9 +33,17 @@ class Categoria
      */
     protected $nome;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Livraria\Entity\Livro", mappedBy="categoria")
+     */
+    protected $livros;
+
+
+
     function __construct($options=null)
     {
         Configurator::configure($this,$options);
+        $this->livros=new ArrayCollection();
     }
 
     /**
@@ -79,6 +87,14 @@ class Categoria
     }
 
     /**
+     * @return mixed
+     */
+    public function getLivros()
+    {
+        return $this->livros;
+    }
+
+    /**
      * @return array
      */
     public  function toArray()
@@ -88,5 +104,8 @@ class Categoria
             'nome'=>$this->getNome()
         );
     }
+
+
+
 
 }

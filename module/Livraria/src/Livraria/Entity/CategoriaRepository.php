@@ -12,4 +12,17 @@ use Doctrine\ORM\EntityRepository;
 class CategoriaRepository extends EntityRepository
 {
 
+    public function fetchPairs()
+    {
+        $categorias=$this->findAll();
+
+        $array=array();
+
+        foreach($categorias as $categoria)
+        {
+            $array[$categoria->getId()]=$categoria->getNome();
+        }
+
+        return $array;
+    }
 }
