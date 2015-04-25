@@ -1,15 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: israel
- * Date: 24/04/15
- * Time: 15:02
- */
 
 namespace Livraria\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Livraria\Entity\Configurator;
 
 /**
  * @ORM\Entity
@@ -25,113 +18,76 @@ class User {
      * @var int
      */
     protected $id;
+
     /**
      * @ORM\Column(type="text")
      * @var string
      */
     protected $nome;
+
     /**
      * @ORM\Column(type="text")
      * @var string
      */
     protected $email;
+
     /**
      * @ORM\Column(type="text")
      * @var string
      */
     protected $password;
 
-
+    /**
+     * @ORM\Column(type="text")
+     * @var string
+     */
     protected $salt;
 
-    function __construct($options=null)
-    {
+    public function __construct($options = null) {
+        Configurator::configure($this, $options);
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
-        Configurator::configure($this,$options);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
+    public function setId($id) {
         $this->id = $id;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNome()
-    {
+    public function getNome() {
         return $this->nome;
     }
 
-    /**
-     * @param mixed $nome
-     */
-    public function setNome($nome)
-    {
+    public function setNome($nome) {
         $this->nome = $nome;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
+    public function setEmail($email) {
         $this->email = $email;
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password)
-    {
-        $hashSenha=$this->encryptPassword($password);
+    public function setPassword($password) {
 
+        $hashSenha = $this->encryptPassword($password);
         $this->password = $hashSenha;
         return $this;
     }
 
-
-
-
-    public function toArray()
-    {
-        return array(
-            'id'=>$this->getId(),
-            'nome'=>$this->getNome(),
-            'email'=>$this->getEmail(),
-            'password'=>$this->getPassword(),
-            //'salt'=>$this->$salt
-        );
+    public function getSalt() {
+        return $this->salt;
     }
 
     public function encryptPassword($password) {
@@ -142,5 +98,14 @@ class User {
         return $hashSenha;
     }
 
+    public function toArray() {
+        return array(
+            'id' => $this->getId(),
+            'nome' => $this->getNome(),
+            'email' => $this->getEmail(),
+            'password' => $this->getPassword(),
+            'salt' => $this->salt
+        );
+    }
 
 }

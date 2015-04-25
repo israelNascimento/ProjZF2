@@ -3,6 +3,12 @@
 <ul>
     <?php foreach($this->categorias as $categoria): ?>
         <li><?php echo $categoria->getNome(); ?></li>
+
+            <ol>
+            <?php foreach($categoria->getLivros() as $livro):?>
+                <li><?php echo $livro->getNome();?></li>
+            <?php endforeach;?>
+                </ol>
     <?php endforeach; ?>
 
 </ul>

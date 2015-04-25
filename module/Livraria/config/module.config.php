@@ -4,6 +4,9 @@ namespace Livraria;
 return array(
     'router' => array(
         'routes' => array(
+
+
+
             'livraria-home' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -36,6 +39,31 @@ return array(
                 ),
             ),
 
+
+
+                    'livraria-admin-auth' => array(
+                        'type' => 'Zend\Mvc\Router\Http\Literal',
+                        'options' => array(
+                            'route'    => '/admin/auth',
+                            'defaults' => array(
+                                'controller' => 'livraria-admin/auth',
+                                'action'     => 'index',
+                            ),
+                        ),
+                    ),
+
+
+            'livraria-admin-logout' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/admin/auth/logout',
+                    'defaults' => array(
+                        'controller' => 'livraria-admin/auth',
+                        'action'     => 'logout',
+                    ),
+                ),
+            ),
+
         ),
     ),
     'service_manager' => array(
@@ -62,10 +90,16 @@ return array(
             'Livraria\Controller\Index' => 'Livraria\Controller\IndexController',
             'categorias' => 'LivrariaAdmin\Controller\CategoriasController',
             'livros' => 'LivrariaAdmin\Controller\LivrosController',
-            'users' => 'LivrariaAdmin\Controller\UsersController'
-
+            'users' => 'LivrariaAdmin\Controller\UsersController',
+            'livraria-admin/auth'=>'LivrariaAdmin\Controller\AuthController'
         ),
     ),
+
+    'module_layouts' => array(
+        'Livraria' => 'layout/layout',
+        'LivrariaAdmin' => 'layout/layout-admin'
+    ),
+
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
